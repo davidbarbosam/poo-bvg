@@ -10,11 +10,14 @@
 class FuncionarioAdministrativo : public UsuarioAutenticavel, public Relatorio {
 private:
     TipoUsuario tipo;
+    std::string nome;
 public:
     FuncionarioAdministrativo(const std::string& nome, const std::string& senha);
 
     bool autenticar(const std::string& senhaTentativa) const override;
     void gerarRelatorio() const override;
+
+    std::string getNome() const { return nome; }
 };
 
 #endif // FUNCIONARIO_ADMINISTRATIVO_H

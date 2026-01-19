@@ -1,26 +1,23 @@
+#ifndef FUNCIONARIO_ADMINISTRATIVO_H
+#define FUNCIONARIO_ADMINISTRATIVO_H
+
+#include <string>
 #include <iostream>
-#include "Aluno.h"
-#include "Professor.h"
-#include "FuncionarioAdministrativo.h"
+#include "UsuarioAutenticavel.h"
+#include "Relatorio.h"
+#include "TipoUsuario.h"
 
-int main() {
-    Aluno aluno("Carlos", "1234");
-    Professor prof("Maria", "abcd");
-    FuncionarioAdministrativo func("João", "admin");
+class FuncionarioAdministrativo : public UsuarioAutenticavel, public Relatorio {
+private:
+    TipoUsuario tipo;
+    std::string nome;
+public:
+    FuncionarioAdministrativo(const std::string& nome, const std::string& senha);
 
-    if (aluno.autenticar("1234")) {
-        aluno.gerarRelatorio();
-        aluno.historico.push_back(Aluno::HistoricoDisciplinar("POO", 2024, 9.0));
-        aluno.historico[0].exibir();
-    }
+    bool autenticar(const std::string& senhaTentativa) const override;
+    void gerarRelatorio() const override;
 
-    if (prof.autenticar("abcd")) {
-        prof.gerarRelatorio();
-    }
+    std::string getNome() const { return nome; }
+};
 
-    if (func.autenticar("admin")) {
-        func.gerarRelatorio();
-    }
-
-    return 0;
-}
+#endif // FUNCIONARIO_ADMINISTRATIVO_H
