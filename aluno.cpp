@@ -1,19 +1,31 @@
 #include "Aluno.h"
+#include <iostream>
 
-Aluno::Aluno() {
-    nome = "";
-    matricula = "";
-    curso = "";
-}
+using namespace std;
 
-Aluno::Aluno(string nome, string matricula, string curso) {
-    this->nome = nome;
+Aluno::Aluno() {}
+
+Aluno::Aluno(string nome, string email, string matricula, string curso)
+    : Usuario(nome, email, "Aluno") {
     this->matricula = matricula;
     this->curso = curso;
 }
 
-void Aluno::exibirInformacoes() {
-    cout << "Nome: " << nome << endl;
+void Aluno::adicionarDisciplina(string d) {
+    disciplinas.push_back(d);
+}
+
+void Aluno::gerarRelatorio() {
+    cout << "Aluno: " << nome << endl;
     cout << "Matricula: " << matricula << endl;
     cout << "Curso: " << curso << endl;
+}
+
+void Aluno::exibirDetalhes() {
+    cout << "Aluno sem notas" << endl;
+}
+
+void Aluno::exibirDetalhes(bool comNotas) {
+    if (comNotas)
+        cout << "Aluno com notas" << endl;
 }

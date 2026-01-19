@@ -1,21 +1,26 @@
 #include <iostream>
 #include <vector>
-#include "Pessoa.h"
+#include "Aluno.h"
+#include "Professor.h"
+#include "FuncionarioAdministrativo.h"
 
 using namespace std;
 
 int main() {
 
-    vector<Pessoa> pessoas;
+    vector<Usuario*> usuarios;
 
-    pessoas.push_back(Pessoa("Joao", "1111-1111"));
-    pessoas.push_back(Pessoa("Maria", "2222-2222"));
-    pessoas.push_back(Pessoa("Ana", "3333-3333"));
+    Aluno a("David", "david@email.com", "123", "ADS");
+    Professor p("Carlos", "carlos@email.com", "Programacao");
+    FuncionarioAdministrativo f("Ana", "ana@email.com", "Secretaria", "Atendente");
 
-    for (int i = 0; i < pessoas.size(); i++) {
-        pessoas[i].imprimirNome();
-        pessoas[i].imprimirTelefone();
-        cout << endl;
+    usuarios.push_back(&a);
+    usuarios.push_back(&p);
+    usuarios.push_back(&f);
+
+    for (Usuario* u : usuarios) {
+        u->gerarRelatorio();
+        cout << "-----" << endl;
     }
 
     return 0;
