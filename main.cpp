@@ -1,27 +1,26 @@
 #include <iostream>
 #include "Aluno.h"
-#include "Disciplina.h"
-
-using namespace std;
+#include "Professor.h"
+#include "FuncionarioAdministrativo.h"
 
 int main() {
+    Aluno aluno("Carlos", "1234");
+    Professor prof("Maria", "abcd");
+    FuncionarioAdministrativo func("João", "admin");
 
-    Aluno aluno1("Joao", "2023001", "ADS");
+    if (aluno.autenticar("1234")) {
+        aluno.gerarRelatorio();
+        aluno.historico.push_back(Aluno::HistoricoDisciplinar("POO", 2024, 9.0));
+        aluno.historico[0].exibir();
+    }
 
-    Disciplina d1("Matematica", 60, 7.0);
-    Disciplina d2("Programacao", 80, 5.5);
+    if (prof.autenticar("abcd")) {
+        prof.gerarRelatorio();
+    }
 
-    aluno1.exibirInformacoes();
-
-    if (verificarAprovacao(d1))
-        cout << "Aprovado em Matematica" << endl;
-    else
-        cout << "Reprovado em Matematica" << endl;
-
-    if (verificarAprovacao(d2))
-        cout << "Aprovado em Programacao" << endl;
-    else
-        cout << "Reprovado em Programacao" << endl;
+    if (func.autenticar("admin")) {
+        func.gerarRelatorio();
+    }
 
     return 0;
 }

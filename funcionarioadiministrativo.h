@@ -1,18 +1,20 @@
-#ifndef FUNCIONARIOADMINISTRATIVO_H
-#define FUNCIONARIOADMINISTRATIVO_H
+#ifndef FUNCIONARIO_ADMINISTRATIVO_H
+#define FUNCIONARIO_ADMINISTRATIVO_H
 
-#include "Usuario.h"
+#include <string>
+#include <iostream>
+#include "UsuarioAutenticavel.h"
+#include "Relatorio.h"
+#include "TipoUsuario.h"
 
-class FuncionarioAdministrativo : public Usuario {
+class FuncionarioAdministrativo : public UsuarioAutenticavel, public Relatorio {
 private:
-    string departamento;
-    string cargo;
-
+    TipoUsuario tipo;
 public:
-    FuncionarioAdministrativo();
-    FuncionarioAdministrativo(string nome, string email, string dep, string cargo);
+    FuncionarioAdministrativo(const std::string& nome, const std::string& senha);
 
-    void gerarRelatorio();
+    bool autenticar(const std::string& senhaTentativa) const override;
+    void gerarRelatorio() const override;
 };
 
-#endif
+#endif // FUNCIONARIO_ADMINISTRATIVO_H

@@ -1,21 +1,20 @@
 #ifndef PROFESSOR_H
 #define PROFESSOR_H
 
-#include "Usuario.h"
-#include <vector>
+#include <string>
+#include <iostream>
+#include "UsuarioAutenticavel.h"
+#include "Relatorio.h"
+#include "TipoUsuario.h"
 
-class Professor : public Usuario {
-protected:
-    string areaDeAtuacao;
-    vector<string> disciplinasMinistradas;
-
+class Professor : public UsuarioAutenticavel, public Relatorio {
+private:
+    TipoUsuario tipo;
 public:
-    Professor();
-    Professor(string nome, string email, string area);
+    Professor(const std::string& nome, const std::string& senha);
 
-    void adicionarDisciplina(string d);
-
-    void gerarRelatorio();
+    bool autenticar(const std::string& senhaTentativa) const override;
+    void gerarRelatorio() const override;
 };
 
-#endif
+#endif // PROFESSOR_H

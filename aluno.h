@@ -1,25 +1,34 @@
 #ifndef ALUNO_H
 #define ALUNO_H
 
-#include "Usuario.h"
+#include <string>
 #include <vector>
+#include <iostream>
+#include "UsuarioAutenticavel.h"
+#include "Relatorio.h"
+#include "TipoUsuario.h"
 
-class Aluno : public Usuario {
-protected:
-    string matricula;
-    string curso;
-    vector<string> disciplinas;
-
+class Aluno : public UsuarioAutenticavel, public Relatorio {
+private:
+    TipoUsuario tipo;
 public:
-    Aluno();
-    Aluno(string nome, string email, string matricula, string curso);
+    Aluno(const std::string& nome, const std::string& senha);
 
-    void adicionarDisciplina(string d);
+    bool autenticar(const std::string& senhaTentativa) const override;
+    void gerarRelatorio() const override;
 
-    void gerarRelatorio();
+    // Classe interna
+    class HistoricoDisciplinar {
+    private:
+        std::string disciplina;
+        int ano;
+        double nota;
+    public:
+        HistoricoDisciplinar(const std::string& disciplina, int ano, double nota);
+        void exibir() const;
+    };
 
-    void exibirDetalhes();
-    void exibirDetalhes(bool comNotas);
+    std::vector<HistoricoDisciplinar> historico;
 };
 
-#endif
+#endif // ALUNO_H
